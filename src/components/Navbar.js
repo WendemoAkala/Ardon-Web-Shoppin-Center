@@ -1,5 +1,5 @@
 import React, {useState } from 'react';
-// import classes from "../Styles/Navbar.css";
+import classes from "../Styles/Navbar.css";
 // import Logo from '../assets/logo-sign2.svg';
 import {Link} from "react-router-dom";
 import ReorderIcon from '@material-ui/icons/Reorder';

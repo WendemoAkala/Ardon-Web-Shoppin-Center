@@ -4,7 +4,7 @@ import ItemList from '../components/Items/ItemList';
 import "../Styles/Menu.css";
 
 function Menu(props) {
-  // const { onAddToCart, onRemoveFromCart} = useAuth();
+
   return (
     <div className='menu'>
        <h1 className='menuTitle'>Our Products</h1>

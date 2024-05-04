@@ -27,11 +27,11 @@ function ItemListPage() {
               <ul>
                 {items.map(item => (
                   <li key={item.id}>
-                    {/* Display item details here */}
+               
                     <p>Item ID: {item.id}</p>
                     <p>Name: {item.name}</p>
                     <p>Price: {item.price}</p>
-                    {/* Add more details as needed */}
+                
                   </li>
                 ))}
               </ul>

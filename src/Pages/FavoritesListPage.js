@@ -52,7 +52,7 @@ function FavoriteListPage(props) {
       <ul>
         {favorites.map((itemId) => (
           <li key={itemId}>
-            {/* Display item details here */}
+          
             <span>{itemId}</span>
             <button onClick={() => handleRemoveFromFavorites(itemId)}>Remove from Favorite</button>
           </li>

@@ -11,7 +11,7 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Contact from "./Pages/Contact";
 import Register from "./components/registration/Register";
 import Login from "./components/registration/Login";
-import { Search } from "@material-ui/icons";
+import Search  from "./components/Search";
 
 
 
@@ -21,7 +21,7 @@ import { Search } from "@material-ui/icons";
 
 function App() {
   return (
-    <div classNam="App">
+    <div className="App">
 
       <Router>
         <Navbar/>

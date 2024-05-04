@@ -9,7 +9,7 @@ function OrderListPage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch user's orders when the component mounts
+   
     const fetchOrders = async () => {
       try {
         const ordersData = await getOrders(userId);
@@ -37,10 +37,10 @@ function OrderListPage() {
           ) : (
             orders.map((order) => (
               <li key={order.id}>
-                {/* Display order details here */}
+             
                 <span>{order.id}</span>
                 <span>{order.date}</span>
-                {/* Add a link to the detailed view */}
+             
                 <Link to={`/orders/${order.id}`}>View Details</Link>
               </li>
             ))

@@ -34,14 +34,17 @@ function Login() {
                 username: user,
                 password: pwd,
             };
-            const response = await authenticate(userBody);
-            setSuccess(true);
+            const response = authenticate(userBody).then(response =>{
+                console.log(response.data);
+                setSuccess(true);
+            })
+            
             setAuth(response.data.jwt);
             setUser("");
             setPwd("");
         } catch (err) {
             if (!err.response) {
-                setErrMsg("No Server Response");
+                setErrMsg("No Server Response ");
             } else if (err.response.status === 403) {
                 setErrMsg("Incorrect Username Or Password");
             } else {

@@ -8,8 +8,8 @@ function ItemList({image, name, price, stock, onAddToCart, onRemoveFromCart }) {
       <h1> {name} </h1>
       <p> {price}$ </p>
       <p> {stock} </p>
-      {/* <button onChange={ onAddToCart}>Add to Cart</button> */}
-      {/* <button onClick={ onRemoveFromCart}>Remove from Cart</button> */}
+       <button onChange={ onAddToCart}>Add to Cart</button> 
+       <button onClick={ onRemoveFromCart}>Remove from Cart</button> 
     </div>
   );
 }

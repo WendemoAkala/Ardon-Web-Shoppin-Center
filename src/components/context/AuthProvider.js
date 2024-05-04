@@ -65,13 +65,13 @@ export const AuthProvider = ({ children }) => {
 
     // const login = () => setLoggedIn(true);
     // const logout = () => setLoggedIn(false);
-    // 
+    
     // const [favorites, setFavorites] = useState([]);
     // const addFavorite = (item) => {
-      // setFavorites((prevFavorites) => [...prevFavorites, item]);
+    //   setFavorites((prevFavorites) => [...prevFavorites, item]);
     // };
     // const removeFavorite = (item) => {
-      // setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.id !== item.id));
+    //   setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.id !== item.id));
     // };
 
     return (
