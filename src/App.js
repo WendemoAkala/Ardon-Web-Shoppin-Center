@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+// import "./App.css";
 import Navbar from "./components/Navbar";
 import Footer from './components/Footer';
 import Home from "./Pages/Home";
@@ -31,7 +31,7 @@ function App() {
           <Route path="/about" exact Component={About}/>
           <Route path="/contact" exact Component={Contact}/>
           <Route path="/orders" exact Component={OrdersListPage}/>
-          <Route path="/favorites" exact Component={FavoritesListPage}/>
+          <Route path="/favorite" exact Component={FavoritesListPage}/>
           <Route path="/login" exact Component={Login }/>
           <Route path="/search" exact Component={Search }/>
           <Route path="/signUp" exact Component={Register} /> 

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams,Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getFavorites, addToFavorites, removeFromFavorites } from '../services/api';
 import ItemList from '../components/Items/ItemList';
 
-function FavoriteListPage(props) {
-  const { userId } = useParams();
+function FavoriteListPage() {
+  const { userId,item } = useParams();
   const [favorites, setFavorites] = useState([]);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [error, setError] = useState('');
+
+
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -13,27 +17,36 @@ function FavoriteListPage(props) {
       const favoritesData = await getFavorites(userId);
       setFavorites(favoritesData);
     } catch (error) {
+      setError('Error fetching favorites. Please try again.');
       console.error('Error fetching favorites:', error);
     }
     };
 
     fetchFavorites();
-  }, [userId]);
+  }, [ userId]);
 
-  const handleAddToFavorites = async (itemId) => {
+  const handleAddToFavorites = async () => {
     try{
-    await addToFavorites(userId, itemId);
-    setFavorites((prevFavorites) => [...prevFavorites, itemId]);
+      const favoriteBody = {
+        userId: userId,
+        item: item,
+      }
+    const response = await addToFavorites(favoriteBody);
+    setFavorites((prevFavorites) => [...prevFavorites, response]);
+    setSuccessMessage('Item added to favorites successfully!');
   } catch (error) {
+    setError('Error adding to favorites. Please try again.');
     console.error('Error adding to  favorites:', error);
   }
   };
 
   const handleRemoveFromFavorites = async (itemId) => {
     try{
-    await removeFromFavorites(userId, itemId);
-    setFavorites((prevFavorites) => prevFavorites.filter((id) => id !== itemId));
+      await removeFromFavorites(userId,itemId);
+      setFavorites((prevFavorites) => prevFavorites.filter((favorite) => favorite.id !== itemId));
+      setSuccessMessage('Item removed from favorites successfully!');
   } catch (error) {
+    setError('Error removing from favorites. Please try again.');
     console.error('Error removing from favorites:', error);
   }
   };
@@ -41,23 +54,21 @@ function FavoriteListPage(props) {
   return (
     <div>
       <h2>Your Favorite Items</h2>
+      {successMessage && <p>{successMessage}</p>}
+      {error && <p>{error}</p>}
       <ul>
-        {ItemList.map((itemId) =>(
-          <li>
-            <span>{itemId}</span>
-            <button onClick={() => handleAddToFavorites(itemId)}>Add to  Favorite</button>
-          </li>
-        ))}
-      </ul>
-      <ul>
-        {favorites.map((itemId) => (
-          <li key={itemId}>
+        {favorites.map((favorite) => (
+          <li key={favorite.id}>
           
-            <span>{itemId}</span>
-            <button onClick={() => handleRemoveFromFavorites(itemId)}>Remove from Favorite</button>
+            <span>{favorite.item}</span>
+            <button onClick={() => handleRemoveFromFavorites(favorites.item.itemId)}>Remove from Favorite</button>
           </li>
         ))}
       </ul>
+      <ItemList 
+        items={favorites}
+        onAddToCart={() => handleAddToFavorites(favorites.item)}
+      />
     </div>
   );
 };

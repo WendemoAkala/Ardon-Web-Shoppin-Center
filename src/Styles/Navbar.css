@@ -68,20 +68,63 @@ font-size: 40px;
     width: 70px;
     margin: 5px;
 }
-@media only screen and (max-width: 900px){
-    .navbar .rightSide a {
+@media only screen and (max-width: 600px) {
+    .navbar .rightSide {
+        display: none;
+    }
+
+    .navbar .hiddenLinks {
+        display: none;
+    }
+
+    .navbar .rightSide button {
+        display: inherit;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+    .navbar .rightSide {
+        display: none;
+    }
+
+    .navbar .hiddenLinks {
+        display: none;
+    }
+
+    .navbar .rightSide button {
+        display: inherit;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .navbar .rightSide {
+        display: inherit;
+    }
+
+    .navbar .rightSide button {
+        display: none;
+    }
+
+    .navbar .hiddenLinks {
+        display: inherit;
+    }
+}
+
+
+/* @media only screen and (min-width: 900px){
+    .navbar .rightSide {
         width: 70px;
     }
     
     .navbar .leftSide {
-        justify-content: flex-end;
-        padding-left: 50px;
+        justify-content: flex-start;
+        padding-left: 150px;
     }
 }
     
-@media only screen and(max-width: 600px){
-.navbar .rightSide a {
-    display: none;
+@media only screen and (max-width: 900px) and (min-width: 600px){
+.navbar .leftSide a {
+    display: inherit;
 }
 
 .navbar .rightSide button{
@@ -94,12 +137,16 @@ font-size: 40px;
 }
 }
 
-@media only screen and(min-width: 600px){
+@media only screen and(max-width: 600px){
     .navbar .rightSide button{
-        display: none;
+        display: inherit;
     }
 
-    .hiddenLinks{
-        display: none;
+    .navbar .rightSide {
+        display: inherit;
     }
-}
+    
+    .hiddenLinks{
+        display: inherit;
+    }
+} */

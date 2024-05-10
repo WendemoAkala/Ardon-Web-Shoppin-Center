@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { getOrder, updateOrder, finalizeOrder } from '../../services/api'; // Replace with your actual API functions
 
 const OrderProcess = () => {
-  const { userId, orderId } = useParams();
+  const { userId } = useParams();
   const [order, setOrder] = useState(null);
   const [isOrderModified, setIsOrderModified] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ const OrderProcess = () => {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const orderData = await getOrder(userId, orderId);
+        const orderData = await getOrder(userId);
         setOrder(orderData);
       } catch (error) {
         setError('Error fetching order. Please try again.');
@@ -24,12 +24,12 @@ const OrderProcess = () => {
     };
 
     fetchOrder();
-  }, [userId, orderId]);
+  }, [userId]);
 
   const handleModifyOrder = async () => {
     try {
-      await updateOrder(userId, orderId, { status: 'Modified' });
-      const updatedOrder = await getOrder(userId, orderId);
+      await updateOrder(userId, { status: 'Modified' });
+      const updatedOrder = await getOrder(userId);
       setOrder(updatedOrder);
       setIsOrderModified(true);
     } catch (error) {
@@ -40,9 +40,9 @@ const OrderProcess = () => {
 
   const handleFinalizeOrder = async () => {
     try {
-      await finalizeOrder(userId, orderId);
+      await finalizeOrder(userId, orderBody);
       setIsOrderModified(true);
-      history.push(`/orders/${userId}/${orderId}/confirmation`);
+      history.push(`/orders/${userId}`);
     } catch (error) {
       setError('Error finalizing order. Please try again.');
       console.error('Error finalizing order:', error);
