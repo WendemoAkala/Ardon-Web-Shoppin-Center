@@ -3,7 +3,7 @@ import {Link } from 'react-router-dom';
 import { getOrders } from '../services/api';
 
 function OrderListPage() {
-  const { orderId, setOrderId} = useState('');
+  const { userId, setOrderId} = useState('');
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,14 +13,15 @@ function OrderListPage() {
    
     const fetchOrders = async () => {
       try {
-        // const UserId = {
-        //   userId: userId,
-        // }
-        const ordersData = await getOrders(orderId);
-        setOrders(ordersData);
-        setOrderId("")
-        setLoading(false);
-        setSuccess(true);
+        const UserId = {
+          userId: userId,
+        }
+         await getOrders(UserId).then(response => {
+          setOrders(response.data);
+          setOrderId("")
+          setLoading(false);
+          setSuccess(true);
+        })
       } catch (error) {
         console.error('Error fetching orders:', error);
         setError('An error occurred while fetching orders.');
@@ -30,7 +31,7 @@ function OrderListPage() {
     };
 
     fetchOrders();
-  }, [setOrderId,orderId]);
+  }, [setOrderId,userId]);
 
   return (
     <div>

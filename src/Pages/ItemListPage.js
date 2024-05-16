@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import {getAllItems} from "../services/api"
 
 function ItemListPage() {
     const [items, setItems] = useState([]);
@@ -7,8 +7,9 @@ function ItemListPage() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get('/api/items')
-            .then(response => {setItems(response.data);
+        getAllItems()
+            .then(response => {
+              setItems(response.data);
               setLoading(false);
             })
             .catch(error => {
@@ -29,7 +30,8 @@ function ItemListPage() {
                   <li key={item.id}>
                
                     <p>Item ID: {item.id}</p>
-                    <p>Name: {item.name}</p>
+                    <p>Name: {item.title}</p>
+                    <p>Image: {item.photoUrl}</p>
                     <p>Price: {item.price}</p>
                 
                   </li>

@@ -3,7 +3,7 @@ import {axiosInstance as axios} from './axiosInstance';
 
 const CREATE_NEW_USER = () => `user/create`;
 const DELETE_USER = (id) => `user/delete/${id}`;
-const UPDATE_USER = () => `user/update/`;
+const UPDATE_USER = () => `user/update`;
 const GET_ALL_USERS_BY_FIRST_NAME = () => `user/All/`;
 const GET_USERS = () => `user/`;
 const GET_ALL_USERS = () => `user/all/`;
@@ -18,17 +18,18 @@ const GET_ALL_ITEM_BY_USER_ID = (userId) => `items/all/${userId}`;
 const GET_ITEM_BY_TITLE = (title) =>`items/item/${title}`;
 
 const CREATE_NEW_ORDER = () => `orders/create`;
-const ALL_USER_ORDERS = (orderId) => `orders/user/${orderId}`;
+const ALL_USER_ORDERS = (userId) => `orders/user/${userId}`;
 const SPECIFIC_ORDER = (userId) => `orders/${userId}`;
 const UPDATE_ORDER_DETAILS = (id) => `orders/updateStatus/${id}`;
 const FINALIZE_ORDER = (orderId) => `orders/modify/${orderId}`;
+const ORDER_HISTORY = (userId) => `orders/history/${userId}`;
 const UPDATE_ITEM_ORDER = () => `orders/updateItem`;
 const DELETE_ORDER = (userId) => `orders/delete/${userId}`;
 
 
 const FAVORITE_ITEMS = (userId) => `favorites/user/${userId}`;
 const ADD_FAVORITE = ()  => `favorites/add`;
-const REMOVE_FAVORITE = (itemId) => `favorites/remove/${itemId}`;
+const REMOVE_FAVORITE = (userId) => `favorites/remove/${userId}`;
 
 const CONTACT = ()  => `test1`;
 
@@ -80,8 +81,8 @@ export const getItemsByUserId =  (userId) => {
   }
 
 
-  export const getOrders =  (orderId) => {
-     return axios.get(ALL_USER_ORDERS(), {orderId});
+  export const getOrders =  (userId) => {
+     return axios.get(ALL_USER_ORDERS(), {userId});
   };
 
   export const getOrder = (userId) => {
@@ -99,6 +100,10 @@ export const getItemsByUserId =  (userId) => {
   export const updateItemStock = (params) => {
    return axios.put(UPDATE_ITEM_ORDER(),{params: params});
 };
+
+export const orderHistory = (userId) => {
+   return axios.get(ORDER_HISTORY(userId),{userId});
+};
   export const deleteOrder = (orderId) => {
    return axios.delete(DELETE_ORDER(),{orderId});
 };
@@ -111,8 +116,8 @@ export const getItemsByUserId =  (userId) => {
      return axios.post(ADD_FAVORITE(), item);
   };
  
-  export const removeFromFavorites =  (itemId) => {  
-     return axios.delete(REMOVE_FAVORITE(), {itemId});
+  export const removeFromFavorites =  (userId, params) => {  
+     return axios.delete(REMOVE_FAVORITE(), {userId}, {params:params});
   };
 
 

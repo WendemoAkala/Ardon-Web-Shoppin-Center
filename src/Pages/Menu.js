@@ -1,15 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Items} from "../components/Items/Items";
 import ItemList from '../components/Items/ItemList';
 import "../Styles/Menu.css";
-import {  createItem, addToFavorites, removeFromFavorites } from '../services/api';
+import {  addToFavorites, removeFromFavorites, getOrders, getAllItems } from '../services/api';
 
 function Menu(props) {
-  
-   const handleAddToCart = async (item) => {
+  const { userId, setOrderId} = useState('');
+  const [orders, setOrders] = useState([]);
+  const handleAddToCart = async (item) => {
     try {
-      await createItem(item);
-    console.log('Added to cart:', item);
+      const UserId = {
+        userId: userId,
+      }
+       await getOrders(UserId).then(response => {
+            console.log('Added to cart:', response.data.name);
+            orders = setOrders(response.data.json());
+            setOrderId('');
+    })
   } catch (error) {
     console.error('Error adding to cart:', error);
   }
@@ -44,7 +51,7 @@ function Menu(props) {
                   name = {item.name}
                   price = {"Price: " + item.price}
                   stock = {"Stock: " + item.stock}
-                  onAddToCart={() => handleAddToCart(item)}
+                  onAddToCart={() => handleAddToCart(item.id)}
                   onRemoveFromCart={() => handleRemoveFromCart(item.id)}
                   onAddToFavorites={() => handleAddToFavorites(item.id)}
                   />

@@ -1,16 +1,18 @@
 import React, {useRef, useState, useEffect} from "react";
-import {search} from "../services/api";
+import {getAllItems} from "../services/api";
 import "../Styles/Search.css";
+import "../Styles/Menu.css";
 import ItemList from "../components/Items/ItemList";
+
 
 function Search(){
   const userRef = useRef();
   const [searchQuery, setSearchQuery] = useState('');
-
   const [searchResults, setSearchResults] = useState([]);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
+  const filteredItems = searchResults.filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()));
   useEffect(() => {
     if (userRef.current) {
     userRef.current.focus();
@@ -22,9 +24,9 @@ function Search(){
       const searchFilter = {
         title: searchQuery,
       };
-      const response = await search( searchFilter);
-        console.log(response.data);
-        setSearchResults(response.data);
+      const response = await getAllItems( searchFilter);
+      console.log(response.data.photoUrl);
+      setSearchResults(response.data);
         setSuccess(true);
         setError('');
     } catch (error) {
@@ -43,18 +45,21 @@ function Search(){
                   {searchQuery.length === 0 ? (
                     <p>No items found.</p>
                   ) : (
-                    <div className='menuList'>
-                      {searchResults.map((item) => (
-                        <div key={item.name}>
-                            <ItemList
-                              key = {item.id}
-                              image = {item.image}
-                              name = {item.name}
-                              price = {"Price: " + item.price}
-                              stock = {"Stock: " + item.stock}
-                              />
-                        </div>
-                      ))}
+                    <div className='menu'>
+                        <div className='menuList'>
+                          {filteredItems.map((item) => (
+                            <div key={item.id}>
+                                <ItemList
+                                  key = {item.id}
+                                  image = {item.photoUrl}
+                                  name = {item.title}
+                                  price = {"Price: " + item.price}
+                                  stock = {"Stock: " + item.stockCount}
+                                  onRemoveFromCart = {item.onRemoveFromCart}
+                                  />
+                            </div>
+                        ))}
+                      </div>
                     </div>
                   )}
               </section>

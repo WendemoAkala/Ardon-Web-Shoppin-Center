@@ -1,14 +1,15 @@
-.search-engine{
-    width: 100%;
-    display: flex;
+.search-engine section{
+    width: 100fr;
+    height: 100fr;
+    /* display: flex; */
     justify-content: space-around;
     align-items: center;
     margin-bottom: 30px;
     margin-top: 10px;
 }
-.search-engine input {
-    width: 70%;
-    height: 45px;
+.search-engine input section{
+    width: 100%;
+    height: 100%;
     border: 1px solid;
     border-radius:  8px;
     padding: 13px 15px;
@@ -16,20 +17,19 @@
     outline: none;
     margin-left: 5px;
     background-color: #ffffff;
-    color: #55555555
-    ;
+    color: #5f5e5e55;
 }
 
- .search-engine button{
+ .search-engine button section {
     border: none;
     border-radius:  8px;
     padding: 12px;
     font-size: 20px;
     outline: none;
     cursor: pointer;
-    background-color: #000000;
+    background-color: #31b5e9;
 }
 
 #search-icon{
-    color: royalblue;
+    color: rgb(65, 225, 86);
 }
